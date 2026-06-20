@@ -60,9 +60,48 @@ class _DetailScreenState extends State<DetailScreen> {
 
             const SizedBox(height: 24),
 
-            Text(
-              '${widget.post.likeCount} likes',
-              style: Theme.of(context).textTheme.titleMedium,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: Row(
+                children: [
+                  const Icon(Icons.favorite, color: Colors.red),
+
+                  const SizedBox(width: 8),
+
+                  Text(
+                    '${widget.post.likeCount}',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+
+                  const SizedBox(width: 24),
+
+                  const Icon(Icons.mode_comment_outlined),
+
+                  const SizedBox(width: 8),
+
+                  const Text(
+                    '12',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+
+                  const Spacer(),
+
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.share_outlined),
+                  ),
+
+                  IconButton(
+                    onPressed: () async {
+                      // existing download logic
+                    },
+                    icon: const Icon(Icons.download_outlined),
+                  ),
+                ],
+              ),
             ),
 
             const SizedBox(height: 24),

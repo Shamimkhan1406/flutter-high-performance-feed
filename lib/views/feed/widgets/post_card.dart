@@ -8,33 +8,23 @@ class PostCard extends StatelessWidget {
   final VoidCallback? onTap;
   final VoidCallback? onLikeTap;
 
-  const PostCard({
-    super.key,
-    required this.post,
-    this.onTap,
-    this.onLikeTap,
-  });
+  const PostCard({super.key, required this.post, this.onTap, this.onLikeTap});
 
   @override
   Widget build(BuildContext context) {
-    final devicePixelRatio =
-        MediaQuery.of(context).devicePixelRatio;
+    final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
 
-    final memCacheWidth =
-        (MediaQuery.of(context).size.width *
-                devicePixelRatio)
-            .round();
+    final memCacheWidth = (MediaQuery.of(context).size.width * devicePixelRatio)
+        .round();
 
     return RepaintBoundary(
       child: Card(
-        margin: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 8,
-        ),
-        elevation: 4,
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        elevation: 6,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        clipBehavior: Clip.antiAlias,
         child: Column(
-          crossAxisAlignment:
-              CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             GestureDetector(
               onTap: onTap,
@@ -43,53 +33,52 @@ class PostCard extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl: post.mediaThumbUrl,
                   memCacheWidth: memCacheWidth,
-                  fit: BoxFit.cover,
                   width: double.infinity,
-                  height: 250,
-                  placeholder: (
-                    context,
-                    url,
-                  ) =>
-                      const SizedBox(
-                    height: 250,
-                    child: Center(
-                      child:
-                          CircularProgressIndicator(),
-                    ),
-                  ),
-                  errorWidget: (
-                    context,
-                    url,
-                    error,
-                  ) =>
-                      const SizedBox(
-                    height: 250,
-                    child: Center(
-                      child: Icon(
-                        Icons.broken_image,
-                      ),
-                    ),
-                  ),
+                  height: 260,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
 
             Padding(
-              padding:
-                  const EdgeInsets.all(12),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               child: Row(
                 children: [
                   IconButton(
                     onPressed: onLikeTap,
                     icon: Icon(
-                      post.isLiked
-                          ? Icons.favorite
-                          : Icons.favorite_border,
+                      post.isLiked ? Icons.favorite : Icons.favorite_border,
+                      color: post.isLiked ? Colors.red : Colors.grey,
                     ),
                   ),
 
                   Text(
                     '${post.likeCount}',
+                    style: const TextStyle(fontWeight: FontWeight.w600),
+                  ),
+
+                  const SizedBox(width: 12),
+
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.mode_comment_outlined),
+                  ),
+
+                  const Text(
+                    '12',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+
+                  const Spacer(),
+
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.share_outlined),
+                  ),
+
+                  IconButton(
+                    onPressed: onTap,
+                    icon: const Icon(Icons.download_outlined),
                   ),
                 ],
               ),

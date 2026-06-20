@@ -17,10 +17,7 @@ class FeedController extends StateNotifier<FeedState> {
 
   Future<void> loadInitialFeed() async {
     try {
-      state = state.copyWith(
-        isLoading: true,
-        error: null,
-      );
+      state = state.copyWith(isLoading: true, error: null);
 
       _page = 0;
 
@@ -36,10 +33,7 @@ class FeedController extends StateNotifier<FeedState> {
         hasMore: posts.length >= AppConstants.pageSize,
       );
     } catch (e) {
-      state = state.copyWith(
-        isLoading: false,
-        error: e.toString(),
-      );
+      state = state.copyWith(isLoading: false, error: e.toString());
     }
   }
 
@@ -49,10 +43,7 @@ class FeedController extends StateNotifier<FeedState> {
     }
 
     try {
-      state = state.copyWith(
-        isLoading: true,
-        error: null,
-      );
+      state = state.copyWith(isLoading: true, error: null);
 
       _page++;
 
@@ -67,29 +58,20 @@ class FeedController extends StateNotifier<FeedState> {
       );
 
       state = state.copyWith(
-        posts: [
-          ...state.posts,
-          ...newPosts,
-        ],
+        posts: [...state.posts, ...newPosts],
         isLoading: false,
         hasMore: newPosts.length >= AppConstants.pageSize,
       );
     } catch (e) {
       _page--;
 
-      state = state.copyWith(
-        isLoading: false,
-        error: e.toString(),
-      );
+      state = state.copyWith(isLoading: false, error: e.toString());
     }
   }
 
   Future<void> refreshFeed() async {
     try {
-      state = state.copyWith(
-        isRefreshing: true,
-        error: null,
-      );
+      state = state.copyWith(isRefreshing: true, error: null);
 
       _page = 0;
 
@@ -105,10 +87,7 @@ class FeedController extends StateNotifier<FeedState> {
         hasMore: posts.length >= AppConstants.pageSize,
       );
     } catch (e) {
-      state = state.copyWith(
-        isRefreshing: false,
-        error: e.toString(),
-      );
+      state = state.copyWith(isLoading: false, error: 'Unable to load feed');
     }
   }
 }
