@@ -1,12 +1,11 @@
-import 'dart:io';
-
-String get superbase_url => Platform.environment['SUPERBASE_URL'] ?? '';
-String get superbase_anon_key => Platform.environment['SUPERBASE_ANON_KEY'] ?? '';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AppConstants {
-  static String supabaseUrl = superbase_url;
+  static String get supabaseUrl =>
+      dotenv.env['SUPABASE_URL'] ?? '';
 
-  static String supabaseAnonKey = superbase_anon_key;
+  static String get supabaseAnonKey =>
+      dotenv.env['SUPABASE_ANON_KEY'] ?? '';
 
   static const String testUserId = 'user_123';
 
